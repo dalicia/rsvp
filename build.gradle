@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    provided
+    compile.extendsFrom provided
+}
+
+idea {
+    module {
+        scopes.PROVIDED.plus += [configurations.provided]
+    }
+}
+
+dependencies {
+    compile 'com.google.guava:guava:18.0'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+
+    provided 'org.slf4j:slf4j-api:1.7.7'
+    provided 'org.slf4j:slf4j-simple:1.7.7'
+    provided 'org.slf4j:jcl-over-slf4j:1.7.7'
+
+    testCompile 'junit:junit:4.11'
+}
