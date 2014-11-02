@@ -7,15 +7,15 @@
 
 
     <servlet>
-        <servlet-name>foo</servlet-name>
-        <servlet-class>dalicia.rsvp.FooServlet</servlet-class>
+        <servlet-name>rsvp</servlet-name>
+        <servlet-class>dalicia.rsvp.RsvpServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>foo</servlet-name>
-        <url-pattern>/foo</url-pattern>
+        <servlet-name>rsvp</servlet-name>
+        <url-pattern>/rsvp</url-pattern>
     </servlet-mapping>
-
+<!--
 
     <filter>
         <filter-name>ObjectifyFilter</filter-name>
@@ -25,4 +25,5 @@
         <filter-name>ObjectifyFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    -->
 </web-app>
