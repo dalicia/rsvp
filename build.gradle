@@ -1,28 +1,54 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.14'
+    }
+}
+
+
 apply plugin: 'java'
 apply plugin: 'idea'
+
+apply plugin: 'war'
+apply plugin: 'appengine'
+
+sourceCompatibility = 1.7
+version = '1.0'
 
 repositories {
     mavenCentral()
 }
 
-configurations {
-    provided
-    compile.extendsFrom provided
-}
-
-idea {
-    module {
-        scopes.PROVIDED.plus += [configurations.provided]
-    }
-}
-
 dependencies {
+    providedCompile 'javax.servlet:servlet-api:2.5'
+
+    compile 'com.google.appengine:appengine-api-1.0-sdk:1.9.14'
     compile 'com.google.guava:guava:18.0'
     compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.2.3'
+    //compile 'com.googlecode.objectify:objectify:5.1.1'
 
-    provided 'org.slf4j:slf4j-api:1.7.7'
-    provided 'org.slf4j:slf4j-simple:1.7.7'
-    provided 'org.slf4j:jcl-over-slf4j:1.7.7'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
 
-    testCompile 'junit:junit:4.11'
+
+appengine {
+    httpPort = 8085
+
+    appcfg {
+        email = 'dnault@gmail.com'
+        passIn = true
+
+        logs {
+            severity = 1
+            outputFile = file('rsvp.log')
+        }
+
+        app {
+            id = 'dalicia-rsvp'
+        }
+    }
 }
