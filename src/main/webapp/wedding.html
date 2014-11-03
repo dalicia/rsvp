@@ -1,0 +1,73 @@
+<html>
+<head>
+<link href="/wedding.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/wedding.js"></script>
+</head>
+<body>
+<div id="choices" class="menu hidden">
+<ul>
+<li onclick="showRsvp()">RSVP</li>
+<li onclick="showInfo()">Information</li>
+<li onclick="showContact()">Contact</li>
+</ul>
+</div>
+
+
+<div id="landing" class="content code">
+    <div class="imageContainer">
+        <div>Please enter your code to proceed</div>
+        <input id="code" type="text" name="code"><br/>
+        <input type="button" value="Submit" onclick="submitCode()" class="submitButton">
+        <img class="landing" src="wedding-dave-alicia-crabs2.png"></img>
+        <p>Artwork by <a href="http://diana-toledano.com/en">Diana Toledano</a></p>
+    </div>
+</div>
+
+<div class="content">
+
+<div id="rsvp" class="rsvp hidden">
+    <ul>
+    <li>
+        Hello, <span id="names"></span>!
+    </li>
+    <li>
+    <input name="attend" type="radio" value="yes">
+    Yes, please reserve seats for me and x guests
+    </input>
+    </li>
+    <li>
+    <input name="attend" type="radio" value="no">
+    Sorry, we will not be able to attend.
+    </input>
+    </li>
+    <input type="button" value="Submit" onclick="submitRsvp()" class="submitButton">
+</div>
+
+
+<div id="info" class="info hidden">
+    <div>
+    <p class="heading">Date &amp; Time
+    <p>Saturday, March 14th, 2015 at 11 o'clock in the morning
+    </div>
+    <div>
+    <p class="heading">Location
+    <p>Farallon Restaurant
+    <p>450 Post St., 4th Floor
+    <p>San Francisco, CA
+    </div>
+    <div>
+    <div>
+    <p class="heading">Registry
+    <p>If you were thinking of getting us a present, we'd love for you to consider a donation to charity instead.  Some of our favorite charities:
+    <div class="list">
+        <p><a href="http://www.shfb.org/">Second Harvest Food Bank of Santa Clara and San Mateo counties</a>
+        <p><a href="http://www.equalitynow.org/">Equality Now</a>
+        <p><a href="http://www.doctorswithoutborders.org/">Doctors Without Borders</a>
+    </div>
+    </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

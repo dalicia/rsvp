@@ -1,0 +1,78 @@
+body {
+    /*
+     background: -webkit-gradient(radial, center top, 0, center top, 400, from(#f9f9f9), to(#b3bdd9));
+     */
+    background: -webkit-gradient(radial, center top, 0, center top, 400, from(#f9f9f9), to(#FFFFF0));
+    font-family: sans-serif;
+}
+.submitButton{
+    padding: 8px 12px;
+    border: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    border-radius: 3px;
+    font-size: 15px;
+    text-align: center;
+}
+ul {
+    list-style: none;
+    margin: 40px 0;
+    height: 34px;
+    -moz-border-radius:4px;
+    -webkit-border-radius: 4px;
+    border-radius:4px;
+}
+li {
+    display : list-item;
+    text-align: -webkit-match-parent;
+}
+.heading{
+    font-size: 20px;
+}
+.content{
+    float: right;
+    width: 560px;
+}
+.list{
+    margin-left: 20px;
+}
+.menu{
+    float: left;
+    width: 380px;
+    margin-right: 20px;
+}
+.hidden{
+    display: none;
+}
+@-webkit-keyframes rotate{
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+img.crab{
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.imageContainer{
+    margin-top: 80px;
+    text-align: center;
+}
+.imageContainer input{
+    padding: 5px;
+    margin: 5px;
+}
+.imageContainer p{
+    font-size: 10px;
+}
+.landing{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
