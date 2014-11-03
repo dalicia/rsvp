@@ -13,7 +13,7 @@
 </div>
 
 
-<div id="landing" class="content code">
+<div id="landing" class="code">
     <div class="imageContainer">
         <div>Please enter your code to proceed</div>
         <input id="code" type="text" name="code"><br/>
@@ -28,19 +28,20 @@
 <div id="rsvp" class="rsvp hidden">
     <ul>
     <li>
-        Hello, <span id="names"></span>!
+        Hello, <span id="names"></span>!  <span id="curGuests"></span>
     </li>
     <li>
     <input name="attend" type="radio" value="yes">
-    Yes, please reserve seats for me and x guests
+    Please reserve a seat for me<span id="guestSelector"></span>.
     </input>
     </li>
     <li>
     <input name="attend" type="radio" value="no">
-    Sorry, we will not be able to attend.
+    Sorry, will not be able to attend.
     </input>
     </li>
     <input type="button" value="Submit" onclick="submitRsvp()" class="submitButton">
+    </ul>
 </div>
 
 
