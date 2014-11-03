@@ -23,8 +23,8 @@ import com.google.common.base.Optional;
 import dalicia.rsvp.protocol.ErrorResponse;
 import dalicia.rsvp.protocol.SuccessResponse;
 
-public class RsvpServlet extends HttpServlet {
-    private static final Logger log = Logger.getLogger(RsvpServlet.class.getName());
+public class LoginServlet extends HttpServlet {
+    private static final Logger log = Logger.getLogger(LoginServlet.class.getName());
 
     private static final ObjectMapper objectMapper = newLenientObjectMapper();
 

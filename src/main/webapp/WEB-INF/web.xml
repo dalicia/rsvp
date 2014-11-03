@@ -7,13 +7,13 @@
 
 
     <servlet>
-        <servlet-name>rsvp</servlet-name>
-        <servlet-class>dalicia.rsvp.RsvpServlet</servlet-class>
+        <servlet-name>login</servlet-name>
+        <servlet-class>dalicia.rsvp.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>rsvp</servlet-name>
-        <url-pattern>/rsvp</url-pattern>
+        <servlet-name>login</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 <!--
 
