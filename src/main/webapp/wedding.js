@@ -63,6 +63,7 @@ var submitCode = function(){
                         document.getElementById("curGuests").innerHTML = "You currently have " + curGuests + " spot(s) reserved";
                     }
                     showInfo();
+                    document.getElementById("headline").classList.remove("hidden");
                 }
             }else{
                 alert('Could not submit');

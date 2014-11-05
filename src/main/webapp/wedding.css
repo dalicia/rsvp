@@ -1,6 +1,6 @@
 body {
     background: -webkit-gradient(radial, center top, 0, center top, 400, from(#f9f9f9), to(#FFFFF0));
-    font-family: proxima-nova, sans-serif;
+    font-family: 'Blackjack', sans-serif;
 }
 .submitButton{
     background: blue;
@@ -109,4 +109,8 @@ img.crab{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+@font-face{
+    font-family: Blackjack;
+    src: url('black_jack.ttf') format('truetype');
 }
