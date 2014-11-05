@@ -68,7 +68,7 @@ a {
     float: right;
     width: 540px;
     margin-left: 20px;
-    background: #e6e6e6;
+    background: #ffffdd;
 }
 .list{
     margin-left: 20px;
@@ -77,7 +77,7 @@ a {
     float: left;
     width: 380px;
     margin-right: 20px;
-    background: #e6e6e6;
+    background: #ffffdd;
 }
 .hidden{
     display: none;
