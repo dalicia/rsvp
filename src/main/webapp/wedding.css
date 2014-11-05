@@ -1,12 +1,12 @@
 body {
-    /*
-     background: -webkit-gradient(radial, center top, 0, center top, 400, from(#f9f9f9), to(#b3bdd9));
-     */
     background: -webkit-gradient(radial, center top, 0, center top, 400, from(#f9f9f9), to(#FFFFF0));
-    font-family: sans-serif;
+    font-family: proxima-nova, sans-serif;
 }
 .submitButton{
+    background: blue;
+    color: #FFFFFF;
     padding: 8px 12px;
+    margin-top: 18px;
     border: 0;
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -16,22 +16,56 @@ body {
     font-size: 15px;
     text-align: center;
 }
+.prompt{
+    margin-bottom: 6px;
+}
+h2{
+    font-size: 24px;
+}
+.active{
+    font-weight: bold;
+}
+#content {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+.headline{
+    margin-bottom: 24px;
+    text-align: center;
+}
+#date{
+    font-size: 44px;
+}
 ul {
+    float: left;
     list-style: none;
-    margin: 40px 0;
-    height: 34px;
+    margin-right: 20px;
     -moz-border-radius:4px;
     -webkit-border-radius: 4px;
     border-radius:4px;
+}
+ul.menuitems{
+    width: 300px;
+    font-size: 27px;
 }
 li {
     display : list-item;
     text-align: -webkit-match-parent;
 }
-.heading{
-    font-size: 20px;
+li.menuitem{
+    margin-bottom: 6px;
+    font: 13px;
+    height: 33px;
 }
-.content{
+p{
+    font-size: 14px;
+}
+a {
+    color: #0088CC;
+}
+.rsvp,
+.info{
     float: right;
     width: 560px;
 }

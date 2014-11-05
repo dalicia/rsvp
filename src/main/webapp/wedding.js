@@ -5,9 +5,13 @@ var names = '';
 var showRsvp = function(){
     toggle(false, true, false, false);
     //TODO: issue ajax for number
+    document.getElementById("rsvpmenu").classList.add("active");
+    document.getElementById("infomenu").classList.remove("active");
 };
 var showInfo = function(){
     toggle(false, false, true, false);
+    document.getElementById("infomenu").classList.add("active");
+    document.getElementById("rsvpmenu").classList.remove("active");
 }
 var showContact = function(){
     window.open("mailto:aradia@gmail.com");
