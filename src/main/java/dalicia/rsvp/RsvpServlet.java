@@ -55,7 +55,7 @@ public class RsvpServlet extends HttpServlet {
 
         log.info("got invitation: " + invitation.get());
 
-        String numAttendingStr = request.getParameter("numAttending");
+        String numAttendingStr = request.getParameter("numGuests");
         if (numAttendingStr == null) {
             response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "missing 'numAttending' parameter")));
             return;
