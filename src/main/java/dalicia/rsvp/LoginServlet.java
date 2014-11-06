@@ -1,6 +1,7 @@
 package dalicia.rsvp;
 
 import static com.google.common.base.Throwables.propagate;
+import static dalicia.rsvp.JsonHelper.newLenientObjectMapper;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -15,10 +16,7 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.base.Optional;
 import dalicia.rsvp.protocol.ErrorResponse;
 import dalicia.rsvp.protocol.SuccessResponse;
@@ -28,15 +26,6 @@ public class LoginServlet extends HttpServlet {
 
     private static final ObjectMapper objectMapper = newLenientObjectMapper();
 
-    private static ObjectMapper newLenientObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-        mapper.enable(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        return mapper;
-    }
 
     private static final InvitationDao invitationDao = new InvitationDaoImpl();
 

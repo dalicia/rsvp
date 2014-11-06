@@ -9,5 +9,5 @@ public interface InvitationDao {
 
     Optional<Invitation> load(String code);
 
-    void save(Invitation invitation);
+    void saveResponse(String code, int numAttending);
 }
