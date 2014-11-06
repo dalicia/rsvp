@@ -56,27 +56,5 @@ public class LoginServlet extends HttpServlet {
         log.info("got invitation: " + invitation.get());
 
         response.getWriter().println(objectMapper.writeValueAsString(new SuccessResponse(invitation.get())));
-//        sendEmail();
-    }
-
-    private void sendEmail() {
-
-        Properties props = new Properties();
-        Session session = Session.getDefaultInstance(props, null);
-
-        String msgBody = "...";
-
-        try {
-            Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("dnault@gmail.com", "Dave Nault"));
-            msg.addRecipient(Message.RecipientType.TO,
-                    new InternetAddress("dnault@mac.com", "Dave Nault"));
-            msg.setSubject("someone made a request");
-            msg.setText(msgBody);
-            Transport.send(msg);
-
-        } catch (Exception e) {
-            throw propagate(e);
-        }
     }
 }
