@@ -20,6 +20,8 @@ var toggle = function(landing, rsvp, info, contact){
     setClass("choices", true);
     setClass("landing", landing);
     setClass("rsvp", rsvp);
+    setClass("rsvpform", rsvp);
+    setClass("rsvpconfirm", !rsvp);
     setClass("info", info);
 }
 var submitRsvp = function(){
@@ -32,7 +34,11 @@ var submitRsvp = function(){
                 if (response["errorCode"]){
                     alert(response["details"]);
                 }else{
-                    //do something
+                    setClass("rsvpform", false);
+                    setClass("rsvpconfirm", true);
+                    var responseMsg = response["message"];
+                    //TODO
+                    document.getElementById("rsvpconfirm").innerHTML = 'SUCCESS';
                 }
             }else{
                 alert('Could not rsvp');

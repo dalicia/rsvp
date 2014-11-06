@@ -1,6 +1,7 @@
 body {
     background: -webkit-gradient(radial, center top, 0, center top, 400, from(#f9f9f9), to(#FFFFF0));
     font-family: 'Blackjack', sans-serif;
+    margin: 0
 }
 .submitButton{
     background: blue;
@@ -19,6 +20,10 @@ body {
 .prompt{
     margin-bottom: 6px;
 }
+h1{
+    margin: 0;
+    padding-top: 32px;
+}
 h2{
     font-size: 24px;
 }
@@ -33,6 +38,7 @@ h2{
 .headline{
     margin-bottom: 24px;
     text-align: center;
+    background: #ffffdd;
 }
 #date{
     font-size: 44px;
@@ -45,8 +51,11 @@ ul {
     border-radius:4px;
 }
 ul.menuitems{
-    width: 300px;
+    width: 340px;
     font-size: 27px;
+    background: #ffffdd;
+    margin-top: 0;
+    padding-top: 10px;
 }
 li {
     display : list-item;
@@ -77,7 +86,6 @@ a {
     float: left;
     width: 380px;
     margin-right: 20px;
-    background: #ffffdd;
 }
 .hidden{
     display: none;
