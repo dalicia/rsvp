@@ -80,7 +80,7 @@ var submitCode = function(){
                     numGuestsAllowed = response.result["maxGuests"];
                     alterPicklist(numGuestsAllowed);
                     updateRsvpCount(response);
-                    showInfo();
+                    showRsvp();
                     document.getElementById("headline").classList.remove("hidden");
                 }
             }else{

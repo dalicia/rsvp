@@ -24,8 +24,12 @@ body {
     width: 320px;
     margin: 0;
 }
+h1{
+    font-size: 20px;
+    padding-top: 10px;
+}
 h2{
-    font-size: 24px;
+    font-size: 15px;
 }
 
 ul{
@@ -33,7 +37,7 @@ ul{
 }
 
 ul.menuitems{
-    font-size: 27px;
+    font-size: 15px;
     background: #ffffdd;
 }
 
@@ -47,6 +51,15 @@ p{
 a {
     color: #0088CC;
 }
+li.menuitem a{
+    text-decoration: none;
+    color: #000000;
+}
+li.menuitem a:hover{
+    text-decoration: underline;
+    color: #000000;
+}
+
 .rsvp,
 .info,
 .contact{
