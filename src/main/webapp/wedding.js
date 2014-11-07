@@ -25,6 +25,16 @@ var toggle = function(landing, rsvp, info, contact){
     setClass("info", info);
 }
 var submitRsvp = function(){
+    var yes = document.getElementById("attendyes");
+    var no = document.getElementById("attendno");
+    if (yes.checked){
+        var guestSelector = document.getElementById("numGuests").value;
+        numGuests = parseInt(guestSelector) + 1;
+    }else if (no.checked){
+        numGuests = 0;
+    }else{
+        return;
+    }
     var req = new XMLHttpRequest();
     req.open("get", "/rsvp?code=" +document.getElementById('code').value + "&numGuests=" + numGuests, true);
     req.onreadystatechange = function(){
@@ -36,9 +46,7 @@ var submitRsvp = function(){
                 }else{
                     setClass("rsvpform", false);
                     setClass("rsvpconfirm", true);
-                    var responseMsg = response["message"];
-                    //TODO
-                    document.getElementById("rsvpconfirm").innerHTML = 'SUCCESS';
+                    document.getElementById("rsvpconfirmmsg").innerHTML = 'Thanks for the RSVP!';
                 }
             }else{
                 alert('Could not rsvp');
@@ -66,7 +74,11 @@ var submitCode = function(){
                     alterPicklist(numGuestsAllowed);
                     curGuests = response.result["actualGuests"];
                     if (curGuests != null){
-                        document.getElementById("curGuests").innerHTML = "You currently have " + curGuests + " spot(s) reserved";
+                        var numActualString = curGuests + " spots";
+                        if (curGuests == 1){
+                            numActualString = "1 spot";
+                        }
+                        document.getElementById("curGuests").innerHTML = "You currently have " + numActualString + " reserved.";
                     }
                     showInfo();
                     document.getElementById("headline").classList.remove("hidden");

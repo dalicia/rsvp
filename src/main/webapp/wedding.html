@@ -34,25 +34,29 @@
    </div>
 
 <div id="rsvp" class="rsvp hidden">
-    <span id="rsvpform">
     <ul>
+    <span id="rsvpform">
     <li class="prompt">
         <h2>Hello, <span id="names"></span>!  <span id="curGuests"></span></h2>
     </li>
     <li>
-    <input name="attend" type="radio" value="yes">
+    <input name="attend" id="attendyes" type="radio" value="yes">
     Please reserve a seat for me<span id="guestSelector"></span>.
     </input>
     </li>
     <li>
-    <input name="attend" type="radio" value="no">
+    <input name="attend" id="attendno" type="radio" value="no">
     Sorry, will not be able to attend.
     </input>
     </li>
     <input type="button" value="Submit" onclick="submitRsvp()" class="submitButton">
-    </ul>
     </span>
-    <span id="rsvpconfirm" class="hidden"></span>
+    <span id="rsvpconfirm" class="hidden">
+        <li class="prompt">
+            <h2 id="rsvpconfirmmsg"></h2>
+        </li>
+    </span>
+    </ul>
 </div>
 
 
