@@ -73,7 +73,8 @@ a {
     color: #0088CC;
 }
 .rsvp,
-.info{
+.info,
+.contact{
     float: right;
     width: 540px;
     margin-left: 20px;
