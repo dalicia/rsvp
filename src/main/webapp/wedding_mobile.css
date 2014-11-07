@@ -1,0 +1,90 @@
+body {
+    background: -webkit-gradient(radial, center top, 0, center top, 400, from(#f9f9f9), to(#FFFFF0));
+    font-family: 'Blackjack', sans-serif;
+    margin: 0
+}
+.submitButton{
+    background: blue;
+    color: #FFFFFF;
+    padding: 8px 12px;
+    margin-top: 18px;
+    border: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    border-radius: 3px;
+    font-size: 15px;
+    text-align: center;
+}
+.active{
+    font-weight: bold;
+}
+#content {
+    width: 320px;
+    margin: 0;
+}
+h2{
+    font-size: 24px;
+}
+
+ul{
+    list-style: none;
+}
+
+ul.menuitems{
+    font-size: 27px;
+    background: #ffffdd;
+}
+
+.headline{
+    background: #ffffdd;
+    text-align: center;
+}
+p{
+    font-size: 14px;
+}
+a {
+    color: #0088CC;
+}
+.rsvp,
+.info,
+.contact{
+    width: 320px;
+    background: #ffffdd;
+}
+.list{
+    margin-left: 20px;
+}
+.menu{
+    width: 320px;
+}
+.hidden{
+    display: none;
+}
+@-webkit-keyframes rotate{
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+img.crab{
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.imageContainer{
+    margin-top: 80px;
+    text-align: center;
+    width: 320px;
+}
+.landing{
+    display: none;
+}
+@font-face{
+    font-family: Blackjack;
+    src: url('black_jack.ttf') format('truetype');
+}
