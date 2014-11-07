@@ -47,6 +47,7 @@ var submitRsvp = function(){
                     setClass("rsvpform", false);
                     setClass("rsvpconfirm", true);
                     document.getElementById("rsvpconfirmmsg").innerHTML = 'Thanks for the RSVP!';
+                    updateRsvpCount(response);
                 }
             }else{
                 alert('Could not rsvp');
@@ -72,14 +73,7 @@ var submitCode = function(){
                     document.getElementById("names").innerHTML = names;
                     numGuestsAllowed = response.result["maxGuests"];
                     alterPicklist(numGuestsAllowed);
-                    curGuests = response.result["actualGuests"];
-                    if (curGuests != null){
-                        var numActualString = curGuests + " spots";
-                        if (curGuests == 1){
-                            numActualString = "1 spot";
-                        }
-                        document.getElementById("curGuests").innerHTML = "You currently have " + numActualString + " reserved.";
-                    }
+                    updateRsvpCount(response);
                     showInfo();
                     document.getElementById("headline").classList.remove("hidden");
                 }
@@ -91,6 +85,18 @@ var submitCode = function(){
     req.send();
     //    req.send(params);
 }
+var updateRsvpCount = function(response){
+    curGuests = response.result["actualGuests"];
+    if (curGuests != null){
+        var numActualString = curGuests + " spots";
+        if (curGuests == 1){
+            numActualString = "1 spot";
+        }
+        document.getElementById("curGuests").innerHTML = "You currently have " + numActualString + " reserved.";
+    }
+
+}
+
 var alterPicklist = function(maxGuests){
     if (maxGuests > 1){
         var newPicklist = " and <select id=\"numGuests\">";
