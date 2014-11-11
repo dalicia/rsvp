@@ -27,10 +27,13 @@ h1{
 h2{
     font-size: 24px;
 }
+.stageleft{
+    display: none;
+}
 .active{
     font-weight: bold;
 }
-#content {
+.content {
     width: 960px;
     margin: 0 auto;
     position: relative;
@@ -71,6 +74,14 @@ p{
 }
 a {
     color: #0088CC;
+}
+li.menuitem a{
+    text-decoration: none;
+    color: #000000;
+}
+li.menuitem a:hover{
+    text-decoration: underline;
+    color: #000000;
 }
 .rsvp,
 .info,
@@ -120,6 +131,9 @@ img.crab{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+.hamburger{
+    display: none;
 }
 @font-face{
     font-family: Blackjack;

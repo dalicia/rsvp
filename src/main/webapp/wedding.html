@@ -16,8 +16,20 @@
     </div>
 </div>
 
+<div id="viewport" class="viewport">
+<div id="stageleft" class="stageleft">
+    <ul class="menuitemsStageLeft">
+        <li id="rsvpmenuStageLeft" class="menuitem"><a href="#"onclick="showRsvp(true)">RSVP</a></li>
+        <li id="infomenuStageLeft" class="menuitem"><a href="#"onclick="showInfo(true)">Information</a></li>
+        <li id="contactmenuStageLeft" class="menuitem"><a href="#" onclick="showContact(true)">Contact</a></li>
+    </ul>
+</div>
+
 <div id="content" class="content">
     <div id="choices" class="menu hidden">
+        <span class="hamburger" onclick="toggleStageLeft()">
+            &#9776;
+        </span>
        <div id="headline" class="headline hidden">
        <h1>
            <span class="us">Alicia &amp; Dave</span>
@@ -99,6 +111,7 @@
         <h2>Call us at 650-xxx-xxxx</h2>
         </li>
     </ul>
+</div>
 </div>
 
 </div>

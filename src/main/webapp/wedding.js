@@ -2,25 +2,29 @@ var curGuests = -1;
 var numGuestsAllowed = -1;
 var numGuests = -1;
 var names = '';
-var showRsvp = function(){
+var showRsvp = function(hideStageLeft){
     toggle(false, true, false, false);
     //TODO: issue ajax for number
-    document.getElementById("rsvpmenu").classList.add("active");
-    document.getElementById("infomenu").classList.remove("active");
-    document.getElementById("contactmenu").classList.remove("active");
+    setActive("rsvpmenu");
+    if (hideStageLeft){
+        toggleStageLeft();
+    }
 };
-var showInfo = function(){
+var showInfo = function(hideStageLeft){
     toggle(false, false, true, false);
-    document.getElementById("infomenu").classList.add("active");
-    document.getElementById("rsvpmenu").classList.remove("active");
-    document.getElementById("contactmenu").classList.remove("active");
+    setActive("infomenu");
+    if (hideStageLeft){
+        toggleStageLeft();
+    }
 }
-var showContact = function(){
+var showContact = function(hideStageLeft){
     toggle(false, false, false, true);
-    document.getElementById("contactmenu").classList.add("active");
-    document.getElementById("rsvpmenu").classList.remove("active");
-    document.getElementById("infomenu").classList.remove("active");
+    setActive("contactmenu");
+    if (hideStageLeft){
+        toggleStageLeft();
+    }
 }
+/* hides certain items in the UI */
 var toggle = function(landing, rsvp, info, contact){
     setClass("choices", true);
     setClass("landing", landing);
@@ -29,6 +33,13 @@ var toggle = function(landing, rsvp, info, contact){
     setClass("rsvpconfirm", !rsvp);
     setClass("info", info);
     setClass("contact", contact);
+}
+/* Bolds the selected in the non-mobile UI*/
+var setActive = function(activeItem){
+    document.getElementById("rsvpmenu").classList.remove("active");
+    document.getElementById("infomenu").classList.remove("active");
+    document.getElementById("contactmenu").classList.remove("active");
+    document.getElementById(activeItem).classList.add("active");
 }
 var submitRsvp = function(){
     var yes = document.getElementById("attendyes");
@@ -118,11 +129,21 @@ var alterPicklist = function(maxGuests){
         document.getElementById("guestSelector").innerHTML = newPicklist;
     }
 }
-var setClass = function(elemName, value){
+var setClass = function(elemName, show){
     var elem = document.getElementById(elemName);
-    if(value){
+    if(show){
         elem.classList.remove("hidden");
     }else{
         elem.classList.add("hidden");
     }
+}
+
+var toggleStageLeft = function(){
+    var stageLeft = document.getElementById("viewport");
+    if (stageLeft.classList.contains("hideStageLeft")){
+        stageLeft.classList.remove("hideStageLeft");
+    }else{
+        stageLeft.classList.add("hideStageLeft");
+    }
+
 }

@@ -20,9 +20,28 @@ body {
 .active{
     font-weight: bold;
 }
-#content {
+.stageleft{
+    display: block;
+    position: absolute;
+    width: 250px;
+}
+.viewport{
+    left: -250px;
+    position: absolute;
+    transition: left .25s ease-in;
+}
+.viewport.hideStageLeft{
+    left: 0;
+}
+.content {
     width: 320px;
     margin: 0;
+    left: 250px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
 }
 h1{
     font-size: 20px;
@@ -39,6 +58,12 @@ ul{
 ul.menuitems{
     font-size: 15px;
     background: #ffffdd;
+    display: none;
+}
+ul.menuitemsStageLeft{
+    width: 200px;
+    font-size: 15px;
+    background: #ffffdd;
 }
 
 .headline{
@@ -51,15 +76,6 @@ p{
 a {
     color: #0088CC;
 }
-li.menuitem a{
-    text-decoration: none;
-    color: #000000;
-}
-li.menuitem a:hover{
-    text-decoration: underline;
-    color: #000000;
-}
-
 .rsvp,
 .info,
 .contact{
@@ -96,6 +112,9 @@ img.crab{
 }
 .landing{
     display: none;
+}
+.hamburger{
+    display: block;
 }
 @font-face{
     font-family: Blackjack;
