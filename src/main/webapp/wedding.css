@@ -4,7 +4,7 @@ body {
     margin: 0
 }
 .submitButton{
-    background: blue;
+    background: #5F9F9F;
     color: #FFFFFF;
     padding: 8px 12px;
     margin-top: 18px;
@@ -69,8 +69,12 @@ li.menuitem{
     font: 13px;
     height: 33px;
 }
+.plain{
+    font-family: "Century Gothic",Helvetica,Arial,sans-serif;
+}
 p{
     font-size: 14px;
+    font-family: "Century Gothic",Helvetica,Arial,sans-serif;
 }
 a {
     color: #0088CC;
