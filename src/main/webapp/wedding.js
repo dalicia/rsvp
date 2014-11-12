@@ -34,12 +34,15 @@ var toggle = function(landing, rsvp, info, contact){
     setClass("info", info);
     setClass("contact", contact);
 }
+var options = ["rsvpmenu", "infomenu", "contactmenu"];
 /* Bolds the selected in the non-mobile UI*/
 var setActive = function(activeItem){
-    document.getElementById("rsvpmenu").classList.remove("active");
-    document.getElementById("infomenu").classList.remove("active");
-    document.getElementById("contactmenu").classList.remove("active");
+    for (var i = 0; i < options.length; i++){
+        document.getElementById(options[i]).classList.remove("active");
+        document.getElementById(options[i] + "StageLeft").classList.remove("active");
+    }
     document.getElementById(activeItem).classList.add("active");
+    document.getElementById(activeItem + "StageLeft").classList.add("active");
 }
 var submitRsvp = function(){
     var yes = document.getElementById("attendyes");
