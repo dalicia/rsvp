@@ -45,7 +45,11 @@ body {
 
 }
 h1{
+    margin-top: 0;
     font-size: 20px;
+    padding-top: 10px;
+}
+div.content h2{
     padding-top: 10px;
 }
 h2{
@@ -68,13 +72,16 @@ ul.menuitemsStageLeft{
     margin-top:0;
     padding-top: 20px;
 }
-
+li.menuitem a{
+    text-decoration: none;
+}
 .headline{
     background: #ffffdd;
     text-align: center;
 }
 p{
     font-size: 14px;
+    margin-right:10px;
 }
 a {
     color: #0088CC;
