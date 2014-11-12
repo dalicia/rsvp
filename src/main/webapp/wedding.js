@@ -113,6 +113,11 @@ var updateRsvpCount = function(response){
             numActualString = "1 spot";
         }
         document.getElementById("curGuests").innerHTML = "You currently have " + numActualString + " reserved.";
+        if (curGuests > 0){
+            document.getElementById("attendyes").checked='yes';
+        }else{
+            document.getElementById("attendno").checked='yes';
+        }
     }
 
 }
