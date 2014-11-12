@@ -1,6 +1,7 @@
 body {
     background: -webkit-gradient(radial, center top, 0, center top, 400, from(#f9f9f9), to(#FFFFF0));
     background: -moz-radial-gradient(center top, circle, #FFFFF0, #f9f9f9);
+    background: -ms-radial-gradient(center top, circle, #F9F9F9, #FFFFF0);
     font-family: 'Blackjack', sans-serif;
     margin: 0
 }
