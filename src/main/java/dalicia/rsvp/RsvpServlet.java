@@ -83,7 +83,7 @@ public class RsvpServlet extends HttpServlet {
             sendErrorEmail(e);
             log.log(Level.SEVERE, "failed to save response", e);
             response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("rsvpFailed",
-                    "Oops, something went wrong -- sorry about that! If it happens again, please get in touch with us by email at <dnault@mac.com> or by phone at 650-242-8376.")));
+                    "Oops, something went wrong -- sorry about that! If it happens again, please get in touch with us by email at daveandalicia2015@icloud.com or by phone at 650-242-8376.")));
             return;
         }
 
