@@ -2,6 +2,7 @@ var curGuests = -1;
 var numGuestsAllowed = -1;
 var numGuests = -1;
 var names = '';
+var guestAllowed = false;
 var showRsvp = function(hideStageLeft){
     toggle(false, true, false, false);
     //TODO: issue ajax for number
@@ -61,6 +62,7 @@ var setActive = function(activeItem){
 var submitRsvp = function(){
     var yes = document.getElementById("attendyes");
     var no = document.getElementById("attendno");
+    var guest = document.getElementById("attendwithguest");
     if (yes.checked){
         if (document.getElementById("numGuests")){
             var guestSelector = document.getElementById("numGuests").value;
@@ -68,6 +70,8 @@ var submitRsvp = function(){
         }else{
             numGuests = 1;
         }
+    }else if (guest.checked){
+        numGuests = 2;
     }else if (no.checked){
         numGuests = 0;
     }else{
@@ -109,7 +113,11 @@ var submitCode = function(){
                 }else{
                     names = response.result["name"];
                     document.getElementById("names").innerHTML = names;
-                    numGuestsAllowed = response.result["maxGuests"];
+                    numGuestsAllowed = response.result["primaryGuests"];
+                    guestAllowed = response.result["additionalGuestAllowed"];
+                    if (guestAllowed){
+                        document.getElementById("guestoption").classList.remove("hidden");
+                    }
                     alterPicklist(numGuestsAllowed);
                     updateRsvpCount(response);
                     showRsvp();
@@ -124,7 +132,7 @@ var submitCode = function(){
     //    req.send(params);
 }
 var updateRsvpCount = function(response){
-    curGuests = response.result["actualGuests"];
+    curGuests = response.result["seatsReserved"];
     if (curGuests != null){
         var numActualString = curGuests + " seats";
         if (curGuests == 1){
@@ -132,7 +140,11 @@ var updateRsvpCount = function(response){
         }
         document.getElementById("subGreeting").innerHTML = "You're currently confirmed for " + numActualString + ".";
         if (curGuests > 0){
-            document.getElementById("attendyes").checked='yes';
+            if (guestAllowed && curGuests == 2){
+                document.getElementById("attendwithguest").checked='yes';
+            }else{
+                document.getElementById("attendyes").checked='yes';
+            }
         }else{
             document.getElementById("attendno").checked='yes';
         }
@@ -146,7 +158,7 @@ var alterPicklist = function(maxGuests){
         for (var i = 1 ; i <= maxGuests; i++){ //
             newPicklist += "<option value=\"" + i + "\">" + i + "</option>";
         }
-        newPicklist += "</select> seat(s) for me" + (maxGuests == 2 ? " and a guest." : " and my guests.");
+        newPicklist += "</select> seat(s).";
         document.getElementById("guestSelector").innerHTML = newPicklist;
         document.getElementById("subGreeting").innerHTML = "We've saved " + maxGuests + " seats for you at our wedding."
     }else{
