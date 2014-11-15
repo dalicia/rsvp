@@ -3,8 +3,12 @@ package dalicia.rsvp;
 public class Invitation {
     private String code;
     private String name;
-    private int maxGuests;
-    private Integer actualGuests;
+
+    private int primaryGuests;
+    private boolean additionalGuestAllowed;
+
+    private Integer seatsReserved;
+
 
     public String getCode() {
         return code;
@@ -22,19 +26,27 @@ public class Invitation {
         this.name = name;
     }
 
-    public int getMaxGuests() {
-        return maxGuests;
+    public boolean isAdditionalGuestAllowed() {
+        return additionalGuestAllowed;
     }
 
-    public void setMaxGuests(int maxGuests) {
-        this.maxGuests = maxGuests;
+    public void setAdditionalGuestAllowed(boolean additionalGuestAllowed) {
+        this.additionalGuestAllowed = additionalGuestAllowed;
     }
 
-    public Integer getActualGuests() {
-        return actualGuests;
+    public int getPrimaryGuests() {
+        return primaryGuests;
     }
 
-    public void setActualGuests(Integer actualGuests) {
-        this.actualGuests = actualGuests;
+    public void setPrimaryGuests(int primaryGuests) {
+        this.primaryGuests = primaryGuests;
+    }
+
+    public Integer getSeatsReserved() {
+        return seatsReserved;
+    }
+
+    public void setSeatsReserved(Integer seatsReserved) {
+        this.seatsReserved = seatsReserved;
     }
 }

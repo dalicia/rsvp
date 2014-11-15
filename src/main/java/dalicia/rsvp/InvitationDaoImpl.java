@@ -24,14 +24,30 @@ public class InvitationDaoImpl implements InvitationDao {
             invitation = new Invitation();
             invitation.setCode(code);
             invitation.setName("Rae & Chris");
-            invitation.setMaxGuests(2);
+            invitation.setPrimaryGuests(2);
+        }
+
+        if (code.equals("heymisterdj")) {
+            invitation = new Invitation();
+            invitation.setCode(code);
+            invitation.setName("Jason");
+            invitation.setPrimaryGuests(1);
+            invitation.setAdditionalGuestAllowed(true);
+        }
+
+        if (code.equals("socalgal")) {
+            invitation = new Invitation();
+            invitation.setCode(code);
+            invitation.setName("Mary Ann");
+            invitation.setPrimaryGuests(1);
+            invitation.setAdditionalGuestAllowed(false);
         }
 
         if (invitation != null) {
             try {
                 DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
                 Entity response = datastore.get(KeyFactory.createKey("Response", invitation.getCode()));
-                invitation.setActualGuests(((Number) response.getProperty("numAttending")).intValue());
+                invitation.setSeatsReserved(((Number) response.getProperty("numAttending")).intValue());
             } catch (EntityNotFoundException e) {
                 // no worries, just means they haven't responded yet!
             }

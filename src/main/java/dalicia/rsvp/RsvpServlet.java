@@ -69,12 +69,16 @@ public class RsvpServlet extends HttpServlet {
             return;
         }
 
-        if (invitation.get().getMaxGuests() < numAttending) {
-            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "'numAttending' must be <= max guests (" + invitation.get().getMaxGuests() + ")")));
+        int maxGuests = invitation.get().getPrimaryGuests();
+        if (invitation.get().isAdditionalGuestAllowed()) {
+            maxGuests ++;
+        }
+        if (maxGuests < numAttending) {
+            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "'numAttending' must be <= max guests (" + maxGuests + ")")));
             return;
         }
 
-        invitation.get().setActualGuests(numAttending);
+        invitation.get().setSeatsReserved(numAttending);
 
         try {
             log.info("Saving response {code='" + code + "' numAttending='" + numAttending + "'}");
@@ -114,8 +118,8 @@ public class RsvpServlet extends HttpServlet {
 
     private void sendEmail(Invitation invitation) {
         try {
-            String subject = "RSVP: " + invitation.getName() + " (" + invitation.getActualGuests() + ")";
-            String body = objectMapper.writeValueAsString(invitation.getActualGuests());
+            String subject = "RSVP: " + invitation.getName() + " (" + invitation.getSeatsReserved() + ")";
+            String body = objectMapper.writeValueAsString(invitation.getSeatsReserved());
             sendEmail(subject, body);
         } catch (Exception e) {
             log.log(Level.SEVERE, "failed to send email", e);
