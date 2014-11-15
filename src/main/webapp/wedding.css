@@ -5,6 +5,18 @@ body {
     font-family: 'Blackjack', sans-serif;
     margin: 0
 }
+
+select {
+    background-image: url(arrow.svg);
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+    background-size: 16px 16px, 100%, 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 40px;
+    padding: 4px 8px;
+}
 .submitButton{
     background: #5F9F9F;
     color: #FFFFFF;
