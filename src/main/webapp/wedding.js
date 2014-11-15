@@ -9,7 +9,21 @@ var showRsvp = function(hideStageLeft){
     if (hideStageLeft){
         toggleStageLeft();
     }
+    if (curGuests != null){ //hide body
+        setClass("rsvpbody", false);
+        setClass("editbody", true);
+    }else{
+        setClass("editbody", false);
+    }
 };
+var showForm = function(){
+    var rsvpbody = document.getElementById("rsvpbody");
+    if (rsvpbody.classList.contains("hidden")){
+        setClass("rsvpbody", true);
+        setClass("editbody", false);
+    }
+}
+
 var showInfo = function(hideStageLeft){
     toggle(false, false, true, false);
     setActive("infomenu");
@@ -48,8 +62,12 @@ var submitRsvp = function(){
     var yes = document.getElementById("attendyes");
     var no = document.getElementById("attendno");
     if (yes.checked){
-        var guestSelector = document.getElementById("numGuests").value;
-        numGuests = parseInt(guestSelector) + 1;
+        if (document.getElementById("numGuests")){
+            var guestSelector = document.getElementById("numGuests").value;
+            numGuests = parseInt(guestSelector);
+        }else{
+            numGuests = 1;
+        }
     }else if (no.checked){
         numGuests = 0;
     }else{
@@ -108,11 +126,11 @@ var submitCode = function(){
 var updateRsvpCount = function(response){
     curGuests = response.result["actualGuests"];
     if (curGuests != null){
-        var numActualString = curGuests + " spots";
+        var numActualString = curGuests + " seats";
         if (curGuests == 1){
-            numActualString = "1 spot";
+            numActualString = "one seat";
         }
-        document.getElementById("curGuests").innerHTML = "You currently have " + numActualString + " reserved.";
+        document.getElementById("subGreeting").innerHTML = "You're currently confirmed for " + numActualString + ".";
         if (curGuests > 0){
             document.getElementById("attendyes").checked='yes';
         }else{
@@ -124,18 +142,18 @@ var updateRsvpCount = function(response){
 
 var alterPicklist = function(maxGuests){
     if (maxGuests > 1){
-        var newPicklist = " and <select id=\"numGuests\">";
-        for (var i = 0 ; i < maxGuests; i++){ //2 max guests, then 0, 1
-            var displayValue = i;
-            if (i == 0){
-                displayValue = "no"
-            }
-            newPicklist += "<option value=\"" + i + "\">" + displayValue + "</option>";
+        var newPicklist = " <select id=\"numGuests\">";
+        for (var i = 1 ; i <= maxGuests; i++){ //
+            newPicklist += "<option value=\"" + i + "\">" + i + "</option>";
         }
-        newPicklist += "</select>";
-        newPicklist += (maxGuests == 2 ? "other guest" : "other guests");
+        newPicklist += "</select> seat(s) for me" + (maxGuests == 2 ? " and a guest." : " and my guests.");
         document.getElementById("guestSelector").innerHTML = newPicklist;
+        document.getElementById("subGreeting").innerHTML = "We've saved " + maxGuests + " seats for you at our wedding."
+    }else{
+        document.getElementById("subGreeting").innerHTML = "We've saved a seat for you at our wedding."
+        document.getElementById("guestSelector").innerHTML = "a seat for me.";
     }
+    
 }
 var setClass = function(elemName, show){
     var elem = document.getElementById(elemName);

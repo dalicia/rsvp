@@ -51,11 +51,12 @@
     <ul>
     <span id="rsvpform">
     <li class="prompt">
-        <h2>Hello, <span id="names"></span>!  <span id="curGuests"></span></h2>
+        <h2>Hello, <span id="names"></span>!  <span id="subGreeting"></span></h2>
     </li>
+    <span id="rsvpbody">
     <li>
     <input name="attend" id="attendyes" type="radio" value="yes">
-    <span class="plain">Please reserve a seat for me<span id="guestSelector"></span>.</span>
+    <span class="plain">Please reserve <span id="guestSelector"></span></span>
     </input>
     </li>
     <li>
@@ -63,7 +64,15 @@
     <span class="plain">Sorry, will not be able to attend.</span>
     </input>
     </li>
+    <li>
     <input type="button" value="Submit" onclick="submitRsvp()" class="submitButton">
+    </li>
+    </span>
+    <span id="editbody">
+    <li>
+    <input type="button" value="Edit" onclick="showForm()" class="submitButton">
+    </li>
+    </span>
     </span>
     <span id="rsvpconfirm" class="hidden">
         <li class="prompt">
