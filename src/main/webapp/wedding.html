@@ -9,8 +9,10 @@
 <div id="landing" class="code">
     <div class="imageContainer">
         <div>Please enter your code to proceed</div>
+        <form onsubmit="submitCode(); return false;">
         <input id="code" type="text" name="code"><br/>
-        <input type="button" value="Submit" onclick="submitCode()" class="submitButton">
+        <input type="submit" value="Submit" class="submitButton">
+        </form>
         <img class="landing" src="wedding-dave-alicia-crabs2.png"></img>
         <p class="landing">Artwork by <a href="http://diana-toledano.com/en">Diana Toledano</a></p>
     </div>
