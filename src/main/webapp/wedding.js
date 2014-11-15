@@ -144,6 +144,9 @@ var updateRsvpCount = function(response){
                 document.getElementById("attendwithguest").checked='yes';
             }else{
                 document.getElementById("attendyes").checked='yes';
+                if (document.getElementById("numGuests")){
+                   document.getElementById("numGuests").options[curGuests-1].selected=true;
+                }
             }
         }else{
             document.getElementById("attendno").checked='yes';
@@ -155,11 +158,13 @@ var updateRsvpCount = function(response){
 var alterPicklist = function(maxGuests){
     if (maxGuests > 1){
         var newPicklist = " <select id=\"numGuests\">";
-        for (var i = 1 ; i <= maxGuests; i++){ //
+        var i = 1;
+        for (i ; i <= maxGuests; i++){ //
             newPicklist += "<option value=\"" + i + "\">" + i + "</option>";
         }
         newPicklist += "</select> seat(s).";
         document.getElementById("guestSelector").innerHTML = newPicklist;
+        document.getElementById("numGuests").options[i-2].selected=true;
         document.getElementById("subGreeting").innerHTML = "We've saved " + maxGuests + " seats for you at our wedding."
     }else{
         document.getElementById("subGreeting").innerHTML = "We've saved a seat for you at our wedding."
