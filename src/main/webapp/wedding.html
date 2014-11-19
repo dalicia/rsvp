@@ -60,22 +60,22 @@
     </li>
     <span id="rsvpbody">
     <li>
-    <input name="attend" id="attendyes" type="radio" value="yes">
+    <input name="attend" id="attendyes" type="radio" value="yes" onclick="showSubmitButton()">
     <span class="plain">Please reserve <span id="guestSelector"></span></span>
     </input>
     </li>
     <li id="guestoption" class="hidden">
-        <input name="attend" id="attendwithguest" type="radio" value="yes">
+        <input name="attend" id="attendwithguest" type="radio" value="yes" onclick="showSubmitButton()">
             <span class="plain">Please reserve a seat for me and a guest.</span>
         </input>
     </li>
     <li>
-    <input name="attend" id="attendno" type="radio" value="no">
+    <input name="attend" id="attendno" type="radio" value="no" onclick="showSubmitButton()">
     <span class="plain">Sorry, will not be able to attend.</span>
     </input>
     </li>
     <li>
-    <input type="button" value="Submit" onclick="submitRsvp()" class="submitButton">
+    <input id="submitbutton" type="button" value="Submit" onclick="submitRsvp()" class="submitButton">
     </li>
     </span>
     <span id="editbody">

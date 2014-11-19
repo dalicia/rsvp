@@ -99,6 +99,9 @@ var submitRsvp = function(){
     req.send();
 
 }
+var showSubmitButton = function(){
+    document.getElementById("submitbutton").classList.remove("hidden");
+}
 var submitCode = function(){
     var req = new XMLHttpRequest();
     req.open("get", "/login?code=" +document.getElementById('code').value, true);
@@ -151,6 +154,8 @@ var updateRsvpCount = function(response){
         }else{
             document.getElementById("attendno").checked='yes';
         }
+    }else{
+        document.getElementById("submitbutton").classList.add("hidden");
     }
 
 }
