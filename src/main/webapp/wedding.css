@@ -14,7 +14,7 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: 40px;
+    width: 50px;
     padding: 4px 8px;
 }
 .submitButton{
