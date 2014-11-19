@@ -170,11 +170,10 @@ var alterPicklist = function(maxGuests){
         newPicklist += "</select> seat(s).";
         document.getElementById("guestSelector").innerHTML = newPicklist;
         document.getElementById("numGuests").options[i-2].selected=true;
-        document.getElementById("subGreeting").innerHTML = "We've saved " + maxGuests + " seats for you at our wedding."
     }else{
-        document.getElementById("subGreeting").innerHTML = "We've saved a seat for you at our wedding."
         document.getElementById("guestSelector").innerHTML = "a seat for me.";
     }
+    document.getElementById("subGreeting").innerHTML = "Will you be celebrating with us?"
     
 }
 var setClass = function(elemName, show){
