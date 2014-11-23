@@ -1,19 +1,11 @@
 package dalicia.rsvp;
 
-import static com.google.common.base.Throwables.propagate;
 import static dalicia.rsvp.JsonHelper.newLenientObjectMapper;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Locale;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,7 +36,8 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        code = code.toLowerCase(Locale.ENGLISH);
+        code = Invitation.canonicalizeCode(code);
+
         Optional<Invitation> invitation = invitationDao.load(code);
 
         if (!invitation.isPresent()) {
@@ -57,4 +50,6 @@ public class LoginServlet extends HttpServlet {
 
         response.getWriter().println(objectMapper.writeValueAsString(new SuccessResponse(invitation.get())));
     }
+
+
 }
