@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 
         if (!invitation.isPresent()) {
             log.info("bad code: '" + code + "'");
-            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badCode", "unrecognized code: '" + code + "'")));
+            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badCode", "Unrecognized code: '" + code + "'. Having problems logging in? Feel free to email us at daveandalicia2015@icloud.com")));
             return;
         }
 
