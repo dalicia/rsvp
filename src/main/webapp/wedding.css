@@ -157,6 +157,9 @@ img.crab{
 .aboveChoices{
     padding-bottom: 15px;
 }
+.indented{
+    margin-left: 10px;
+}
 @font-face{
     font-family: Blackjack;
     src: url('black_jack.ttf') format('truetype');
