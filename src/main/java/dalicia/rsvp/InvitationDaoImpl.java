@@ -3,7 +3,6 @@ package dalicia.rsvp;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static dalicia.rsvp.Invitation.canonicalizeCode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,6 +17,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.repackaged.com.google.common.collect.Iterables;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 public class InvitationDaoImpl implements InvitationDao {
@@ -29,58 +29,58 @@ public class InvitationDaoImpl implements InvitationDao {
     private final ImmutableMap<String, Invitation> invitationsByCode;
 
     public InvitationDaoImpl() {
-        List<Invitation> guestList = new ArrayList<>();
+        List<Invitation> guestList = ImmutableList.of(
+                guests("Char", "Brian").code("Venn"),
+                guests("Kristina", "Tse Wei").code("Beatty"),
+                guests("Kate", "Summer").code("TwentyDogs"),
+                guests("Steph", "Sei Wei").code("Counterpoint"),
+                guests("Donna", "Eugene").code("PajamaParty"), // christina's parents
+                guests("Ching Ching", "Charles").code("SweetTooth"),
+                guests("Yvonne", "Donald").code("dsong88"),
+                guests("Andrina").plusOne().code("SisterAct"),
+                guests("Karen", "Tom").code("BuckyBadger"),
+                guests("Laura", "Steve", "Susan", "Robert").code("Arsenal"),
+                guests("Diane", "Dan").code("DanPan"),
+                guests("Phil").plusOne().code("PhabulousPhil"),
 
-        guestList.add(guests("Char", "Brian").code("Venn"));
-        guestList.add(guests("Kristina", "Tse Wei").code("Beatty"));
-        guestList.add(guests("Kate", "Summer").code("TwentyDogs"));
-        guestList.add(guests("Steph", "Sei Wei").code("Counterpoint"));
-        guestList.add(guests("Donna", "Eugene").code("PajamaParty")); // christina's parents
-        guestList.add(guests("Ching Ching", "Charles").code("SweetTooth"));
-        guestList.add(guests("Yvonne", "Donald").code("dsong88"));
-        guestList.add(guests("Andrina").plusOne().code("SisterAct"));
-        guestList.add(guests("Karen", "Tom").code("BuckyBadger"));
-        guestList.add(guests("Laura", "Steve", "Susan", "Robert").code("Arsenal"));
-        guestList.add(guests("Diane", "Dan").code("DanPan"));
-        guestList.add(guests("Phil").plusOne().code("PhabulousPhil"));
+                guests("Andrea", "Justin").code("GoEarth"),
+                guests("Julia", "Matt").code("DoctorDoctor"),
+                guests("Rae", "Chris").code("MarvelousMilnes"),
+                guests("Huong", "Tom", "Sammy", "Spencer").code("Monger"),
 
-        guestList.add(guests("Andrea", "Justin").code("GoEarth"));
-        guestList.add(guests("Julia", "Matt").code("DoctorDoctor"));
-        guestList.add(guests("Rae", "Chris").code("MarvelousMilnes"));
-        guestList.add(guests("Huong", "Tom", "Sammy", "Spencer").code("Monger"));
+                guests("Sophie", "Yuwen").code("RichTable"),
+                guests("Diana", "Steve").code("MmmmRamen"),
+                guests("Jason").plusOne().code("HeyMrDJ"),
 
-        guestList.add(guests("Sophie", "Yuwen").code("RichTable"));
-        guestList.add(guests("Diana", "Steve").code("MmmmRamen"));
-        guestList.add(guests("Jason").plusOne().code("HeyMrDJ"));
+                guests("Tracy").code("TracyYee"),
+                guests("Sharon").code("SharonYee"),
+                guests("Iris", "Charles").code("Tsang"),
+                guests("Siu Wan", "Len Yan").code("NYNY"), // NY aunt & uncle
+                guests("Jenny", "Jenny's Husband").code("TimGunn"), // NY cousin
+                guests("Brian").code("101101"),  // NY cousin
+                guests("Mary Ann").code("SocalGal"),
+                guests("Mary Ann's Mom").code("NorcalMom"),
+                guests("Grandma").code("Pawpaw"),
 
-        guestList.add(guests("Tracy").code("TracyYee"));
-        guestList.add(guests("Sharon").code("SharonYee"));
-        guestList.add(guests("Iris", "Charles").code("Tsang"));
-        guestList.add(guests("Siu Wan", "Len Yan").code("NYNY")); // NY aunt & uncle
-        guestList.add(guests("Jenny", "Jenny's Husband").code("TimGunn")); // NY cousin
-        guestList.add(guests("Brian").code("101101"));  // NY cousin
-        guestList.add(guests("Mary Ann").code("SocalGal"));
-        guestList.add(guests("Mary Ann's Mom").code("NorcalMom"));
-        guestList.add(guests("Grandma").code("Pawpaw"));
+                // todo: revisit after dust settles
+                guests("Alvin").code("Cthulhu"),
+                guests("Claudia").code("Firaga"),
 
-        // todo: revisit after dust settles
-        // guestList.add(guests("Alvin").code("Cthulhu"));
-        // guestList.add(guests("Claudia").code("Firaga"));
+                guests("Renee", "Ben").code("Sharknado"),
+                guests("Mark").plusOne().code("Elky"),
+                guests("Lovina").plusOne().code("What'sUpDoc"),
+                guests("Mike").plusOne().code("CrackShot"),   // Lawrence
 
-        guestList.add(guests("Renee", "Ben").code("Sharknado"));
-        guestList.add(guests("Mark").plusOne().code("Elky"));
-        guestList.add(guests("Lovina").plusOne().code("What'sUpDoc"));
-        guestList.add(guests("Mike").plusOne().code("CrackShot"));   // Lawrence
-
-        guestList.add(guests("Aunt Beth").plusOne().code("Montessori"));
-        guestList.add(guests("Peter").plusOne().code("He++"));
-        guestList.add(guests("Ellen").plusOne().code("GobletOfFire"));
+                guests("Aunt Beth").plusOne().code("Montessori"),
+                guests("Peter").plusOne().code("He++"),
+                guests("Ellen").plusOne().code("GobletOfFire"),
 
 
-        guestList.add(guests("Name").code("test1"));
-        guestList.add(guests("Name").plusOne().code("test1+1"));
-        guestList.add(guests("Name1", "Name2").code("test2"));
-        guestList.add(guests("Name1", "Name2", "Name3", "Name4").code("test4"));
+                guests("Name").code("test1"),
+                guests("Name").plusOne().code("test1+1"),
+                guests("Name1", "Name2").code("test2"),
+                guests("Name1", "Name2", "Name3", "Name4").code("test4")
+        );
 
         this.invitationsByCode = ImmutableMap.copyOf(indexByCode(guestList));
     }
