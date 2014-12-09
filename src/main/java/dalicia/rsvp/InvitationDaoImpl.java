@@ -58,8 +58,8 @@ public class InvitationDaoImpl implements InvitationDao {
                 guests("Siu Wan", "Len Yan").code("NYNY"), // NY aunt & uncle
                 guests("Jenny", "Jenny's Husband").code("TimGunn"), // NY cousin
                 guests("Brian").code("101101"),  // NY cousin
-                guests("Mary Ann").code("SocalGal"),
-                guests("Mary Ann's Mom").code("NorcalMom"),
+                guests("Marianne").code("SocalGal"),
+                guests("Donna").code("NorcalMom"), // Marianne's Mom
                 guests("Grandma").code("Pawpaw"),
 
                 // todo: revisit after dust settles
