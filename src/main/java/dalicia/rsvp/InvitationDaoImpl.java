@@ -70,6 +70,7 @@ public class InvitationDaoImpl implements InvitationDao {
                 guests("Mark").plusOne().code("Elky"),
                 guests("Lovina").plusOne().code("What'sUpDoc"),
                 guests("Mike").plusOne().code("CrackShot"),   // Lawrence
+                guests("Mike").plusOne().code("DalyOperation"), // Daly
 
                 guests("Aunt Beth").plusOne().code("Montessori"),
                 guests("Peter").plusOne().code("He++"),
