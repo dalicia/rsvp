@@ -17,6 +17,16 @@ select {
     width: 50px;
     padding: 4px 8px;
 }
+.email{
+    width: 250px;
+}
+.whoami{
+    width: 250px;
+}
+.small{
+    font-size: 5px;
+}
+
 .submitButton{
     background: #5F9F9F;
     color: #FFFFFF;

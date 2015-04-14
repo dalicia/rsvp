@@ -5,23 +5,15 @@ var names = '';
 var guestAllowed = false;
 var showRsvp = function(hideStageLeft){
     toggle(false, true, false, false);
-    //TODO: issue ajax for number
     setActive("rsvpmenu");
     if (hideStageLeft){
         toggleStageLeft();
     }
-    if (curGuests != null){ //hide body
-        setClass("rsvpbody", false);
-        setClass("editbody", true);
-    }else{
-        setClass("editbody", false);
-    }
-};
+}
 var showForm = function(){
     var rsvpbody = document.getElementById("rsvpbody");
     if (rsvpbody.classList.contains("hidden")){
         setClass("rsvpbody", true);
-        setClass("editbody", false);
     }
 }
 
@@ -60,25 +52,19 @@ var setActive = function(activeItem){
     document.getElementById(activeItem + "StageLeft").classList.add("active");
 }
 var submitRsvp = function(){
-    var yes = document.getElementById("attendyes");
-    var no = document.getElementById("attendno");
-    var guest = document.getElementById("attendwithguest");
-    if (yes.checked){
-        if (document.getElementById("numGuests")){
-            var guestSelector = document.getElementById("numGuests").value;
-            numGuests = parseInt(guestSelector);
-        }else{
-            numGuests = 1;
-        }
-    }else if (guest.checked){
-        numGuests = 2;
-    }else if (no.checked){
-        numGuests = 0;
-    }else{
+    var whoami = document.getElementById("whoami").value;
+    var comingyes = document.getElementById("comingyes").checked;
+    var comingno = document.getElementById("comingno").checked;
+    if (!comingyes && !comingno){
+        alert("Before submitting, please select 'YES!' or 'Sorry, can't make it'!");
+        return;
+    }
+    if ("" === whoami){
+        alert("Before submitting, please enter your name(s).");
         return;
     }
     var req = new XMLHttpRequest();
-    req.open("get", "/rsvp?code=" +document.getElementById('code').value + "&numGuests=" + numGuests, true);
+    req.open("get", "/rsvp?whoami=" +whoami + "&coming=" + comingyes + "&email=" + document.getElementById("email").value, true);
     req.onreadystatechange = function(){
         if (req.readyState == 4){
             if (req.status == 200){
@@ -94,7 +80,7 @@ var submitRsvp = function(){
                     updateRsvpCount(response);
                 }
             }else{
-                alert("Oops! We couldn't record your response because something's wrong with our server. Please try again in a few moments, or email us at daveandalicia2015@icloud.com");
+                alert("Oops! We couldn't record your response because something's wrong with our server. Please try again in a few moments, or email us at xxxx@icloud.com");
             }
         }
     }
@@ -104,82 +90,12 @@ var submitRsvp = function(){
 var showSubmitButton = function(){
     document.getElementById("submitbutton").classList.remove("hidden");
 }
-var submitCode = function(){
-    var req = new XMLHttpRequest();
-    req.open("get", "/login?code=" +document.getElementById('code').value, true);
-    //    req.open("post", "/rsvp", true);
-    //    var params = "code=" + document.getElementById("code").value;
-    req.onreadystatechange = function(){
-        if (req.readyState == 4){
-            if (req.status == 200){
-                var response = JSON.parse(req.response);
-                if (response["errorCode"]){
-                    alert(response["details"]);
-                }else{
-                    names = response.result["name"];
-                    document.getElementById("names").innerHTML = names;
-                    numGuestsAllowed = response.result["primaryGuests"];
-                    guestAllowed = response.result["additionalGuestAllowed"];
-                    if (guestAllowed){
-                        document.getElementById("guestoption").classList.remove("hidden");
-                    }
-                    alterPicklist(numGuestsAllowed);
-                    updateRsvpCount(response);
-                    showRsvp();
-                    document.getElementById("headline").classList.remove("hidden");
-                }
-            }else{
-                alert('Could not submit');
-            }
-        }
-    }
-    req.send();
-    //    req.send(params);
-}
-var updateRsvpCount = function(response){
-    curGuests = response.result["seatsReserved"];
-    if (curGuests != null){
-        var numActualString = curGuests + " seats";
-        if (curGuests == 1){
-            numActualString = "one seat";
-        }
-        document.getElementById("subGreeting").innerHTML = "You're currently confirmed for " + numActualString + ".";
-        if (curGuests > 0){
-            if (guestAllowed && curGuests == 2){
-                document.getElementById("attendwithguest").checked='yes';
-            }else{
-                document.getElementById("attendyes").checked='yes';
-                if (document.getElementById("numGuests")){
-                   document.getElementById("numGuests").options[curGuests-1].selected=true;
-                }
-            }
-        }else{
-            document.getElementById("attendno").checked='yes';
-        }
-    }else{
-        document.getElementById("submitbutton").classList.add("hidden");
-    }
 
-}
-
-var alterPicklist = function(maxGuests){
-    if (maxGuests > 1){
-        var newPicklist = " <select id=\"numGuests\">";
-        var i = 1;
-        for (i ; i <= maxGuests; i++){ //
-            newPicklist += "<option value=\"" + i + "\">" + i + "</option>";
-        }
-        newPicklist += "</select> seat(s).";
-        document.getElementById("guestSelector").innerHTML = newPicklist;
-        document.getElementById("numGuests").options[i-2].selected=true;
-    }else{
-        document.getElementById("guestSelector").innerHTML = "a seat for me.";
-    }
-    document.getElementById("subGreeting").innerHTML = "Will you be celebrating with us?"
-    
-}
 var setClass = function(elemName, show){
     var elem = document.getElementById(elemName);
+    if (!elem){
+        return;
+    }
     if(show){
         elem.classList.remove("hidden");
     }else{

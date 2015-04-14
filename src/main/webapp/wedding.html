@@ -8,17 +8,6 @@
 <title>Alicia & Dave</title>
 </head>
 <body>
-<div id="landing" class="code">
-    <div class="imageContainer">
-        <div>Please enter your code to proceed</div>
-        <form onsubmit="submitCode(); return false;">
-        <input id="code" type="text" name="code"><br/>
-        <input type="submit" value="Submit" class="submitButton">
-        </form>
-        <img class="landing" src="wedding-dave-alicia-crabs2.png"></img>
-        <p class="landing">Custom artwork by <a href="http://diana-toledano.com/en">Diana Toledano</a></p>
-    </div>
-</div>
 
 <div id="viewport" class="viewport">
 <div id="stageleft" class="stageleft">
@@ -30,7 +19,7 @@
 </div>
 
 <div id="content" class="content">
-    <div id="choices" class="menu hidden">
+    <div id="choices" class="menu">
         <span class="hamburger" onclick="toggleStageLeft()">
             &#9776;
         </span>
@@ -39,7 +28,7 @@
            <span class="us">Alicia &amp; Dave</span>
        </h1>
        <h2>
-           March 14, 2015
+           July 17, 2015
        </h2>
     </div>
     <div>
@@ -51,46 +40,41 @@
     </div>
    </div>
 
-<div id="rsvp" class="rsvp hidden">
+<div id="rsvp" class="rsvp">
     <ul>
     <span id="rsvpform">
     <li class="prompt">
-        <h2>Hello, <span id="names"></span>!</h2>
+        <h2>Hello!</h2>
         <div id="subGreeting" class="plain aboveChoices"></span>
     </li>
     <li>
     </li>
     <span id="rsvpbody">
     <li>
-    <input name="attend" id="attendyes" type="radio" value="yes" onclick="showSubmitButton()">
-    <span class="plain">Please reserve <span id="guestSelector"></span></span>
-    </input>
-    </li>
-    <li id="guestoption" class="hidden">
-        <input name="attend" id="attendwithguest" type="radio" value="yes" onclick="showSubmitButton()">
-            <span class="plain">Please reserve a seat for me and a guest.</span>
-        </input>
+    <span class="plain">Please tell us your name(s): </span>
+    <input name="whoami" id="whoami" class="whoami">
     </li>
     <li>
-    <input name="attend" id="attendno" type="radio" value="no" onclick="showSubmitButton()">
-    <span class="plain">Sorry, will not be able to attend.</span>
-    </input>
+    <span class="plain">Email address (optional):
+    <input id="email" class="email"></span>
+    </li>
+    <li>&nbsp;</li>
+    <li>
+    <span class="plain">Will you be celebrating with us?</span>
+    </li>
+    <li>
+    <input id="comingyes" name="coming" type="radio" value="yes">
+    <span class="plain">YES!</span>
+    </li>
+    <li>
+    <input id="comingno" name="coming" type="radio" value="no">
+    <span class="plain">Sorry, can't make it.</span>
     </li>
     <li>
     <input id="submitbutton" type="button" value="Submit" onclick="submitRsvp()" class="submitButton">
     </li>
     </span>
-    <span id="editbody">
-    <li>
-    <input type="button" value="Edit" onclick="showForm()" class="submitButton">
-    </li>
     </span>
-    </span>
-    <span id="rsvpconfirm" class="hidden">
-        <li class="prompt">
-            <h2 id="rsvpconfirmmsg"></h2>
-            <div id="rsvpmessage" class="plain aboveChoices"></span>
-        </li>
     </span>
     </ul>
 </div>
@@ -100,23 +84,14 @@
     <ul>
     <div>
         <h2>Time</h2>
-        <p>11 o'clock in the morning
+        <p>5 pm in the evening
     </div>
     <div>
         <h2>Location</h2>
-        <p>Farallon Restaurant
-        <p>450 Post St., 4th Floor
-        <p>San Francisco, CA
-        <p>Parking lots are located in Union Square and the Metreon.  There will be limited valet parking available.
-    </div>
-    <div>
-        <h2>Registry</h2>
-        <p>If you were thinking of getting us a present, we'd love for you to consider a donation to charity instead.  Some of our favorite charities:
-        <div class="list">
-            <p><a href="http://www.shfb.org/">Second Harvest Food Bank of Santa Clara and San Mateo counties</a>
-            <p><a href="http://www.equalitynow.org/">Equality Now</a>
-            <p><a href="http://www.doctorswithoutborders.org/">Doctors Without Borders</a>
-        </div>
+        <p>Little Chute Civic Center
+        <p>625 Grand Ave
+        <p>Little Chute, WI 54140
+        <p>(Hint: It's also the library.)
     </div>
     </ul>
 </div>
@@ -124,7 +99,7 @@
 <div id="contact" class="contact hidden">
     <ul>
         <li>
-        <h2 class="plain"><a href="mailto:daveandalicia2015@icloud.com">Send us an email</a></h2>
+        <h2 class="plain"><a href="mailto:xxxx@icloud.com">Send us an email</a></h2>
         </li>
         <li>
             <h2 class="plain indented">or</h2>
@@ -137,5 +112,10 @@
 </div>
 
 </div>
+<script>
+document.getElementById("whoami").focus();
+toggle(false, true, false, false);
+setActive("rsvpmenu");
+</script>
 </body>
 </html>
