@@ -17,86 +17,87 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.appengine.repackaged.com.google.common.base.Throwables;
-import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableSet;
 import dalicia.rsvp.protocol.ErrorResponse;
 import dalicia.rsvp.protocol.SuccessResponse;
+import org.apache.commons.lang3.StringUtils;
 
 public class RsvpServlet extends HttpServlet {
     private static final Logger log = Logger.getLogger(LoginServlet.class.getName());
 
     private static final ObjectMapper objectMapper = newLenientObjectMapper();
 
-    private static final InvitationDao invitationDao = new InvitationDaoImpl();
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doPost(request, response);
+    }
+
+    public static class ResponseDetails {
+        private final String whoami;
+        private final String email;
+        private final boolean coming;
+
+        public ResponseDetails(String whoami, String email, boolean coming) {
+            this.whoami = whoami;
+            this.email = email;
+            this.coming = coming;
+        }
+
+        public String getWhoami() {
+            return whoami;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public boolean isComing() {
+            return coming;
+        }
+
+        @Override
+        public String toString() {
+            return "Response{" +
+                    "whoami='" + whoami + '\'' +
+                    ", email='" + email + '\'' +
+                    ", coming=" + coming +
+                    '}';
+        }
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
 
-        String code = request.getParameter("code");
-        if (code == null) {
-            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "missing 'code' parameter")));
+        String whoami = request.getParameter("whoami");
+        if (StringUtils.isBlank(whoami)) {
+            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "missing 'whoami' parameter")));
             return;
         }
 
-        code = code.toLowerCase(Locale.ENGLISH);
-        Optional<Invitation> invitation = invitationDao.load(code);
-
-        if (!invitation.isPresent()) {
-            log.info("bad code: '" + code + "'");
-            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badCode", "unrecognized code: '" + code + "'")));
+        String email = request.getParameter("email");
+        String comingStr = request.getParameter("coming").toLowerCase(Locale.ROOT);
+        if (!ImmutableSet.of("true", "false").contains(comingStr)) {
+            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "bad/or missing 'coming' parameter")));
             return;
         }
 
-        log.info("got invitation: " + invitation.get());
+        boolean coming = Boolean.parseBoolean(comingStr);
 
-        String numAttendingStr = request.getParameter("numGuests");
-        if (numAttendingStr == null) {
-            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "missing 'numAttending' parameter")));
-            return;
-        }
-
-        final int numAttending;
-        try {
-            numAttending = Integer.parseInt(numAttendingStr);
-        } catch (NumberFormatException e) {
-            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "'numAttending' must be an integer")));
-            return;
-        }
-
-        int maxGuests = invitation.get().getPrimaryGuests();
-        if (invitation.get().isAdditionalGuestAllowed()) {
-            maxGuests ++;
-        }
-        if (maxGuests < numAttending) {
-            response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("badRequest", "'numAttending' must be <= max guests (" + maxGuests + ")")));
-            return;
-        }
-
-        invitation.get().setSeatsReserved(numAttending);
+        ResponseDetails responseDetails = new ResponseDetails(whoami, email, coming);
 
         try {
-            log.info("Saving response {code='" + code + "' numAttending='" + numAttending + "'}");
-            invitationDao.saveResponse(code, numAttending);
+            log.info("Emailing response " + responseDetails);
+            sendEmail(responseDetails);
+
         } catch (Exception e) {
-            sendErrorEmail(e);
-            log.log(Level.SEVERE, "failed to save response", e);
+            log.log(Level.SEVERE, "failed to email response for " + responseDetails, e);
             response.getWriter().println(objectMapper.writeValueAsString(new ErrorResponse("rsvpFailed",
                     "Oops, something went wrong -- sorry about that! If it happens again, please get in touch with us by email at daveandalicia2015@icloud.com or by phone at 650-242-8376.")));
             return;
         }
 
-        response.getWriter().println(objectMapper.writeValueAsString(new SuccessResponse(invitation.get())));
-        sendEmail(invitation.get());
-    }
-
-    private void sendErrorEmail(Exception error) {
-        sendEmail("RSVP failure: " + error.getMessage(), Throwables.getStackTraceAsString(error));
+        response.getWriter().println(objectMapper.writeValueAsString(new SuccessResponse(responseDetails)));
     }
 
     private void sendEmail(String subject, String body) {
@@ -112,17 +113,17 @@ public class RsvpServlet extends HttpServlet {
             Transport.send(msg);
 
         } catch (Exception e) {
-            log.log(Level.SEVERE, "failed to send email", e);
+            log.log(Level.SEVERE, "failed to send email, subject: " + subject + "  body: " + body, e);
         }
     }
 
-    private void sendEmail(Invitation invitation) {
+    private void sendEmail(ResponseDetails responseDetails) {
         try {
-            String subject = "RSVP: " + invitation.getName() + " (" + invitation.getSeatsReserved() + ")";
-            String body = objectMapper.writeValueAsString(invitation.getSeatsReserved());
+            String subject = "RSVP: " + responseDetails.whoami + " (" + (responseDetails.coming ? "YES" : "NO") + ")";
+            String body = objectMapper.writeValueAsString(responseDetails);
             sendEmail(subject, body);
         } catch (Exception e) {
-            log.log(Level.SEVERE, "failed to send email", e);
+            log.log(Level.SEVERE, "failed to send email for " + responseDetails, e);
         }
     }
 }
