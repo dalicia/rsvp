@@ -74,10 +74,9 @@ var submitRsvp = function(){
                 }else{
                     setClass("rsvpform", false);
                     setClass("rsvpconfirm", true);
-                    document.getElementById("rsvpconfirmmsg").innerHTML = numGuests > 0 ? 'Great!' : 'Aw, shucks.';
-                    document.getElementById("rsvpmessage").innerHTML = numGuests > 0 ? ("Got it, " + numGuests + " seat(s). We're looking forward to celebrating with you!") :
+                    document.getElementById("rsvpconfirmmsg").innerHTML = comingyes ? 'Great!' : 'Aw, shucks.';
+                    document.getElementById("rsvpmessage").innerHTML = comingyes ? ("Got it! We're looking forward to celebrating with you!") :
                        "Thanks for letting us know. Don't worry; we still love you! :-)";
-                    updateRsvpCount(response);
                 }
             }else{
                 alert("Oops! We couldn't record your response because something's wrong with our server. Please try again in a few moments, or email us at xxxx@icloud.com");
